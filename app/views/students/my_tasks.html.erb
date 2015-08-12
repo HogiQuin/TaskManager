@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8 well">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#all_tasks" data-target="#all_tasks" data-toggle="tab">All Tasks</a>
+                </li>
+                <li>
+                  <a href="#tasks_by_courses" data-target="#tasks_by_courses" data-toggle="tab">Tasks by Courses</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active fade in" id="all_tasks">
+                  <div class="container">
+                    <br><br>
+                    <div class="jumbotron">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Task Title</th>
+                            <th>Description</th>
+                            <th>Date To Deliver</th>
+                            <th>Course</th>
+                          </tr>
+                        </thead>
+                        <% @groups.each do |group| %>
+                          <% group.courses.each do |course| %>
+                            <% course.tasks.each do |task| %>
+                            <% if course.semester.status == 1 %>
+                              <tbody>
+                                <tr>
+                                  <td><%= task.title %></td>
+                                  <td><%= task.description %></td>
+                                  <td><%= task.date_to_deliver %></td>
+                                  <td><%= course.name %></td>
+                                </tr>
+                              </tbody>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tasks_by_courses">
+                  <div class="container">
+                    <br><br>
+                    <% @groups.each do |group| %>
+                      <% group.courses.each do |course| %>
+                        <% if course.semester.status == 1 %>
+                        <div class="jumbotron">
+                          <h3><%= course.name %></h3>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Task Title</th>
+                                <th>Description</th>
+                                <th>Date To Deliver</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% course.tasks.each do |task| %>
+                                  <tr>
+                                    <td><%= task.title %></td>
+                                    <td><%= task.description %></td>
+                                    <td><%= task.date_to_deliver %></td>
+                                  </tr>
+                                <% end %>
+                              <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

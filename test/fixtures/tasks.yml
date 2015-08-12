@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  date_to_deliver: 2015-08-08 18:57:54
+
+two:
+  title: MyString
+  description: MyString
+  date_to_deliver: 2015-08-08 18:57:54

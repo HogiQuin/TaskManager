@@ -1,0 +1,26 @@
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="text-center">Login</h1>
+      </div>
+      <div class="modal-body">
+        <%= form_for(:session, url: login_path) do |f| %>
+        <div class="form-group">
+          <%= f.text_field :user_number, class: "form-control input-lg", placeholder: "User"%>
+        </div>
+        <div class="form-group">
+          <%= f.password_field :password, class: "form-control input-lg", placeholder: "Password"%>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Login" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12">
+		    </div>
+      </div>
+    </div>
+  </div>
+</div>

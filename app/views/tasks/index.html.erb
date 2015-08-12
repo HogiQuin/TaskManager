@@ -1,0 +1,25 @@
+<div class="container">
+  <table class="table">
+  <% @courses.each do |course| %>
+  <% if course.semester.status == 1 %>
+  <thead>
+    <tr>
+      <th><%= course.name %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% course.groups.each do |group| %>
+    <tr>
+      <td>
+        <%= group.name %>
+        <ul>
+          <% group.tasks.each do |task| %>
+          <li><%= link_to task.title, task_path(task) %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+    <% end %>
+  <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TaskManager</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if current_user %>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" >TaskManager</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <% if current_user %>
+            <% if current_user.student? %>
+              <li><%= link_to "Home", '/welcome' %></li>
+            <% end %>
+            <% if current_user.instructor? %>
+              <li><%= link_to "Home", '/welcome_instructor' %></li>
+            <% end %>
+            <% if current_user.admin? %>
+              <li><%= link_to "Home", '/welcome_admin' %></li>
+            <% end %>
+          <% end %>
+          <% if current_user  && current_user.admin? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Semesters
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "All Semesters", semesters_path %></li>
+              <li><%= link_to "New Semester", new_semester_path %></li>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Groups
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user && current_user.admin? %>
+                <li><%= link_to "All Groups", groups_path %></li>
+                <li><%= link_to "New Group", new_group_path %></li>
+              <% elsif current_user.student? %>
+                <li><%= link_to "My groups", my_group_path %></li>
+              <% elsif current_user.instructor? %>
+                <li><%= link_to "My groups", my_groups_instructor_path %></li>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Courses
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user.admin? %>
+                <li><%= link_to "All Courses", courses_path %></li>
+                <li><%= link_to "New Course", new_course_path %></li>
+              <% end %>
+              <% if current_user.student? %>
+                <li><%= link_to "My Courses", my_courses_path %></li>
+              <% end %>
+              <% if current_user.instructor? %>
+                <li><%= link_to "My Courses", my_courses_instructor_path %></li>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user  && current_user.instructor? || current_user.student? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tasks
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <% if current_user.instructor? %>
+                <li><%= link_to "All Tasks", tasks_path %></li>
+                <li><%= link_to "New Task", new_task_path %></li>
+              <% elsif current_user.student? %>
+                <li><%= link_to "My Tasks", my_tasks_path %>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+          <% if current_user && current_user.admin?%>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "All Users", users_path %></li>
+              <li><%=link_to "New User", new_user_path %></li>
+            </ul>
+          </li>
+          <% end %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.first_name %>
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            <% if current_user %>
+              <li><%= link_to "Edit Profile" ,edit_user_path(current_user)%></li>
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "Login", 'login'  %></li>
+              <li><%= link_to "Signup", 'signup' %></li>
+            <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>

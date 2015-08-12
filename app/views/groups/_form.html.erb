@@ -1,0 +1,48 @@
+<div class="container">
+  <%= form_for @group, class: "form-horizontal" do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@group.errors.count, "error") %> prohibited
+        this group from being saved:
+      </h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Group Name:</label>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Semester:</label>
+      <div class="col-sm-10">
+        <%= f.select :semester_id, options_for_select(Semester.all.map{ |s| [s.name, s.id] }) %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Students:</label>
+      <div class="col-sm-10">
+        <%= select_tag "students_groups", options_from_collection_for_select(User.all.where(role: 'student'), 'id', 'full_name',@group.users.map{ |g| g.id }), :multiple => true %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+      <div align="center">
+        <%= f.submit "Add Group", class: "btn btn-primary align-center" %>
+      </div>
+    </div>
+  <% end %>
+</div>

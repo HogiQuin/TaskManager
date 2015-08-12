@@ -1,0 +1,29 @@
+<div class="container">
+  <h1> Semesters </h1>
+  <div class="container">
+    <table class="table">
+      <tr>
+        <th> Name </th>
+        <th> Start Date </th>
+        <th> End Date </th>
+        <th> Status (1 = Active, 0 = Inactive)</th>
+        <th> Edit </th>
+        <th> Delete </th>
+      </tr>
+      <% @semesters.each do |semester| %>
+        <tr>
+          <td> <%= semester.name %> </td>
+          <td> <%= semester.start_date %> </td>
+          <td> <%= semester.end_date %> </td>
+          <td> <%= semester.status %> </td>
+          <td> <%= link_to "Edit", edit_semester_path(semester), class: "btn btn-warning align-center" %></td>
+          <td> <%= link_to 'Destroy', semester_path(semester),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: "btn btn-danger align-center" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>

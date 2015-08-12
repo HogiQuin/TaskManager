@@ -1,0 +1,38 @@
+<% if current_user.admin? %>
+  <div class="container">
+    <h1> Users </h1>
+    <div class="container">
+      <table class="table">
+        <tr>
+          <th> User Number </th>
+          <th> First Name </th>
+          <th> Last Name </th>
+          <th> Age </th>
+          <th> Email</th>
+          <th> Phone </th>
+          <th> Role </th>
+          <th> Edit </th>
+          <th> Delete </th>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td> <%= user.user_number %> </td>
+            <td> <%= user.first_name %> </td>
+            <td> <%= user.last_name %> </td>
+            <td> <%= user.age %> </td>
+            <td> <%= user.email %> </td>
+            <td> <%= user.phone %> </td>
+            <td> <%= user.role %> </td>
+            <td> <%= link_to "Edit", edit_user_path(user), class: "btn btn-warning align-center" %></td>
+            <td> <%= link_to 'Destroy', user_path(user),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      class: "btn btn-danger align-center" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <%= raise ActionController::RoutingError.new('Not Found') %>
+<% end %>

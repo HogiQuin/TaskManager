@@ -1,0 +1,101 @@
+<div class="container">
+  <%= form_for @user, class: "form-horizontal" do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this user from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="form-group">
+      <label class="control-label col-sm-2">User Number:</label>
+      <div class="col-sm-10">
+        <%= f.text_field :user_number, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Password:</label>
+      <div class="col-sm-10">
+        <%= f.password_field :password, class:"form-control" %>
+      </div>
+    </div>
+    <% if current_user %>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Role:</label>
+      <div class="col-sm-10">
+        <%= f.radio_button :role, 'admin' %>
+        <%= label :role, 'Admin' %>
+        <%= f.radio_button :role, 'instructor' %>
+        <%= label :role, 'Instructor' %>
+        <%= f.radio_button :role, 'student' %>
+        <%= label :role, 'Student' %>
+      </div>
+    </div>
+    <% end %>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">First Name:</label>
+      <div class="col-sm-10">
+        <%= f.text_field :first_name, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Last Name:</label>
+      <div class="col-sm-10">
+        <%= f.text_field :last_name, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Age:</label>
+      <div class="col-sm-10">
+        <%= f.number_field :age, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Email:</label>
+      <div class="col-sm-10">
+        <%= f.email_field :email, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <label class="control-label col-sm-2">Phone:</label>
+      <div class="col-sm-10">
+        <%= f.phone_field :phone, class:"form-control" %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+      <div align="center">
+        <%= f.submit "Add User", class: "btn btn-primary align-center" %>
+      </div>
+    </div>
+  <% end %>
+</div>

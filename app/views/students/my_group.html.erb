@@ -1,0 +1,24 @@
+<div class="container">
+  <h1> My Groups </h1>
+  <% @groups.each do |group| %>
+  <% group.courses.each do |course| %>
+  <% if course.semester.status == 1 %>
+    <h3><%= group.name %></h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Students</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% group.users.each do |user| %>
+          <tr>
+            <td><%= user.full_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <% end %>
+  <% end %>
+</div>
