@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                         length: {minimum: 4}
 
   validates :user_number ,presence: true,
-                          length: {maximum: 10, minimum: 10},
+                          length: {maximum: 5, minimum: 5},
                           allow_blank: true,
                           uniqueness: true
 
